@@ -39,6 +39,9 @@ function savingTask(): void {
     // @ts-ignore
     Cookies.set("toDoList",JSON.stringify(myToDoList));
     DisplayTask(task);
+    // reset the default value and set focus for input text
+    (<HTMLInputElement>($("newTaskInput"))).value = "";
+    (<HTMLInputElement>($("newTaskInput"))).focus();
 }
 
 /**

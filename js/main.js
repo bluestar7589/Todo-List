@@ -18,6 +18,8 @@ function savingTask() {
     myToDoList.push(task);
     Cookies.set("toDoList", JSON.stringify(myToDoList));
     DisplayTask(task);
+    ($("newTaskInput")).value = "";
+    ($("newTaskInput")).focus();
 }
 function disableTask() {
     let taskList = $("taskList");
