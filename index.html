@@ -2,10 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script defer src="js/main.js"></script>
     <title>To do List</title>
 </head>
 <body>
-    
+    <div class="container">
+        <h1 class="text-center mt-5">To-do List</h1>
+
+        <!-- To-do list -->
+        <ul class="list-group mt-5">
+            <li class="list-group-item">
+                <div id="taskList">
+                
+                </div>
+            </li>
+            <!-- Add more list items as needed -->
+        </ul>
+
+        <!-- Button to create a new task -->
+        <div id="addNewTask" class="d-flex justify-content-center">
+            <button class="btn btn-primary mt-5" type="button" data-bs-toggle="modal" data-bs-target="#newTaskModal">
+                Add New Task
+            </button>
+        </div>
+
+        <!-- Modal for creating a new task -->
+        <div class="modal fade" id="newTaskModal" tabindex="-1" aria-labelledby="newTaskModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newTaskModalLabel">New Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="newTaskInput" placeholder="Enter new task">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSaveTask">Save Task</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
