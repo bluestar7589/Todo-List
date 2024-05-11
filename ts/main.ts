@@ -16,6 +16,11 @@ window.onload = function() {
     let taskList = $("taskList") as HTMLDivElement;
     // add even onclick for checkbox on the taskList
     taskList.onclick = disableTask;
+
+    // define the list of tasks
+    let myToDoList: ToDo[] = [];
+    // @ts-ignore
+    Cookies.set("toDoList",JSON.stringify(myToDoList));
 }
 
 /**
@@ -27,7 +32,12 @@ function savingTask(): void {
     let task = new ToDo();
     task.taskText = taskDetail.value;
     task.isComplete = false;
-    
+
+    // @ts-ignore
+    let myToDoList:ToDo[] = JSON.parse(Cookies.get("toDoList")) as ToDo[];
+    myToDoList.push(task);
+    // @ts-ignore
+    Cookies.set("toDoList",JSON.stringify(myToDoList));
     DisplayTask(task);
 }
 
@@ -37,17 +47,31 @@ function savingTask(): void {
 function disableTask(): void {
     let taskList = $("taskList") as HTMLDivElement;
     let tasks = taskList.children;
+    // @ts-ignore
+    let myToDoList:ToDo[] = JSON.parse(Cookies.get("toDoList")) as ToDo[];
     // loop through each task and make the task disable if the checkbox was checked
     for (let i = 0; i < tasks.length; i++) {
         let task = tasks[i] as HTMLLIElement; // Change the type of 'task' variable to HTMLLIElement
         let chkBox = task.getElementsByTagName("input")[0] as HTMLInputElement;
         if (chkBox.checked) {
             task.style.textDecoration = "line-through";
+            // set the task already finish to object
+            for (let index = 0; index < myToDoList.length; index++) {
+                if (myToDoList[index].taskText == task.textContent.trim()) {
+                    myToDoList[index].isComplete = true;
+                }
+            }
         } else {
             task.style.textDecoration = "none";
+            for (let index = 0; index < myToDoList.length; index++) {
+                if (myToDoList[index].taskText == task.textContent.trim()) {
+                    myToDoList[index].isComplete = false;
+                }
+            }
         }
-    }  
-    
+    }
+    // @ts-ignore
+    Cookies.set("toDoList",JSON.stringify(myToDoList));
 }
 
 /**
@@ -62,12 +86,13 @@ function DisplayTask(task: ToDo):void {
     chkBox.type = "checkbox";
     newTask.appendChild(chkBox);
     newTask.innerHTML += " " + task.taskText;
-   
     taskList.appendChild(newTask);
 }
 
-// Create a object for ToDo
+// Create a class for ToDo to keep the task
 class ToDo {
+    // To keep the task context
     taskText:string;
+    // To keep the status of the task
     isComplete:boolean;
 }
