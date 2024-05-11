@@ -4,6 +4,8 @@ This exercise create a functional ToDo list application that can keep track of m
 
 ## Live website
 
+Check out the live website hosted by [GitHub Pages](https://bluestar7589.github.io/Todo-List/)
+
 ## Guide how to setup for initial project
 
 ### Install the TypeScript
